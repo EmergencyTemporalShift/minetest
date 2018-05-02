@@ -20,13 +20,17 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 #include "content_mapblock.h"
 #include "util/numeric.h"
 #include "util/directiontables.h"
+#ifndef mapblock_mesh_h
 #include "mapblock_mesh.h"
+#endif
 #include "settings.h"
 #include "nodedef.h"
 #include "client/tile.h"
 #include "mesh.h"
 #include <IMeshManipulator.h>
+#ifndef collector_h
 #include "client/meshgen/collector.h"
+#endif
 #include "client/renderingengine.h"
 #include "client.h"
 #include "noise.h"

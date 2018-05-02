@@ -133,6 +133,7 @@ public:
 	}
 
 	void updateCameraOffset(v3s16 camera_offset);
+	void updatePlanetOffset(v3s16 planet_offset);
 
 private:
 	scene::IMesh *m_mesh[MAX_TILE_LAYERS];
@@ -171,7 +172,55 @@ private:
 
 	// Camera offset info -> do we have to translate the mesh?
 	v3s16 m_camera_offset;
+
+	// Mesh offset that is caused by the map wrapping around when rendering in planet mode
+	v3s16 m_planet_offset;
 };
+
+
+
+// /*
+// 	This is used because CMeshBuffer::append() is very slow
+// */
+// struct PreMeshBuffer
+// {
+// 	TileLayer layer;
+// 	std::vector<u16> indices;
+// 	std::vector<video::S3DVertex> vertices;
+// 	std::vector<video::S3DVertexTangents> tangent_vertices;
+// };
+// 
+// struct MeshCollector
+// {
+// 	std::array<std::vector<PreMeshBuffer>, MAX_TILE_LAYERS> prebuffers;
+// 	bool m_use_tangent_vertices;
+// 
+// 	MeshCollector(bool use_tangent_vertices):
+// 		m_use_tangent_vertices(use_tangent_vertices)
+// 	{
+// 	}
+// 
+// 	void append(const TileSpec &material,
+// 				const video::S3DVertex *vertices, u32 numVertices,
+// 				const u16 *indices, u32 numIndices);
+// 	void append(const TileLayer &material,
+// 			const video::S3DVertex *vertices, u32 numVertices,
+// 			const u16 *indices, u32 numIndices, u8 layernum,
+// 			bool use_scale = false);
+// 	void append(const TileSpec &material,
+// 				const video::S3DVertex *vertices, u32 numVertices,
+// 				const u16 *indices, u32 numIndices, v3f pos,
+// 				video::SColor c, u8 light_source);
+// 	void append(const TileLayer &material,
+// 			const video::S3DVertex *vertices, u32 numVertices,
+// 			const u16 *indices, u32 numIndices, v3f pos,
+// 			video::SColor c, u8 light_source, u8 layernum,
+// 			bool use_scale = false);
+// 	/*!
+// 	 * Colorizes all vertices in the collector.
+// 	 */
+// 	void applyTileColors();
+// };
 
 /*!
  * Encodes light of a node.
